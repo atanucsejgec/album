@@ -35,6 +35,7 @@
 </style>
 </head>
 <body>
+
 <script>
     function moveImageRandomly(image) {
         const x = Math.random() * (window.innerWidth - image.width);
@@ -68,12 +69,23 @@
         backButton.style.display = 'block';
     }
 
+    function startBackgroundMusic() {
+        const audio = document.createElement('audio');
+        audio.src = 'music.mp3'; // Replace with your audio file path
+        audio.autoplay = true;
+        audio.loop = true;
+        document.body.appendChild(audio);
+    }
+
     window.onload = function () {
         const images = document.querySelectorAll('.image');
         images.forEach(image => {
             moveImageRandomly(image);
             setInterval(() => moveImageRandomly(image), 3000);
             image.onclick = function () {
+                if (confirm("Do you want to start the music?")) {
+                    startBackgroundMusic();
+                }
                 enlargeImage(this);
             };
         });
