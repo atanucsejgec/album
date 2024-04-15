@@ -44,20 +44,26 @@
     }
 
     function enlargeImage(image) {
+        // Set image to cover the entire viewport
+        image.style.position = 'fixed';
+        image.style.top = '0';
+        image.style.left = '0';
+        image.style.width = '100vw';
+        image.style.height = '100vh';
+        image.style.objectFit = 'cover'; // Ensure the entire image is visible without distortion
+        image.style.cursor = 'pointer';
+
+        // Create a back button
         const backButton = document.createElement('button');
         backButton.textContent = 'Back';
         backButton.className = 'back-button';
         backButton.onclick = function () {
-            image.style.transform = 'none'; // Reset any transformation
-            image.style.zIndex = 'initial';
-            image.style.position = 'absolute';
-            image.style.width = '150px'; /* Adjust as needed */
-            image.style.height = '100px'; /* Adjust as needed */
-            backButton.style.display = 'none';
+            image.style.position = 'static'; // Reset position to static
+            image.style.width = '150px'; // Reset width
+            image.style.height = '100px'; // Reset height
+            document.body.removeChild(backButton); // Remove back button
         };
         document.body.appendChild(backButton);
-
-        backButton.style.display = 'block';
     }
 
     function startBackgroundMusic() {
